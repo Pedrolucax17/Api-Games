@@ -21,7 +21,7 @@ public class GamesController {
         return gamesService.saveGame(game);
     }
 
-    @GetMapping
+    @GetMapping("/listGames")
     @ResponseStatus(HttpStatus.OK)
     public List<Games> listAllGames(){
         return gamesService.listAllGames();
