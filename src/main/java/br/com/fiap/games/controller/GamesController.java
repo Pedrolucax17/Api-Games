@@ -15,7 +15,7 @@ public class GamesController {
     @Autowired
     private GamesService gamesService;
 
-    @GetMapping
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Games saveGame(@RequestBody Games game){
         return gamesService.saveGame(game);
