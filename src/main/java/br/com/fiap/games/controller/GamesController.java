@@ -32,4 +32,10 @@ public class GamesController {
     public Games searchGamesById(@PathVariable Long id){
         return gamesService.searchGameById(id);
     }
+
+    @DeleteMapping("/id/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteGame(@PathVariable Long id){
+        gamesService.deleteGame(id);
+    }
 }

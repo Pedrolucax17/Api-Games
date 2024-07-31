@@ -31,4 +31,7 @@ public class GamesService {
         }
     }
 
+    public void deleteGame(Long id) {
+        gamesRepository.deleteById(id);
+    }
 }
