@@ -1,0 +1,2 @@
+ALTER TABLE tbl_user
+ALTER COLUMN role SET DEFAULT 'user';
