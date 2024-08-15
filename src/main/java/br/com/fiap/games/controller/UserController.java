@@ -21,4 +21,9 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/id/{id}")
+    public UserExhibitionDto userExhibitionDto(@PathVariable Long id){
+        return userService.searchUserById(id);
+    }
+
 }

@@ -12,6 +12,4 @@ public class AuthController {
 
     private AuthenticationManager authenticate;
 
-
-
 }

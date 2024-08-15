@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -25,6 +27,17 @@ public class UserService {
         User userSave = userRepository.save(user);
 
         return new UserExhibitionDto(userSave);
+    }
+
+    public UserExhibitionDto searchUserById(Long id){
+        Optional<User> userOptional = userRepository.findById(id);
+        if(userOptional.isPresent()){
+            User user = userOptional.get();
+            UserExhibitionDto userExhibitionDto = new UserExhibitionDto(user);
+            return userExhibitionDto;
+        }else{
+            throw new RuntimeException("Usuário não encontrado");
+        }
     }
 
 }
