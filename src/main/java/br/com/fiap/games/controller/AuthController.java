@@ -1,6 +1,10 @@
 package br.com.fiap.games.controller;
 
 import br.com.fiap.games.dto.LoginDto;
+import br.com.fiap.games.dto.TokenDto;
+import br.com.fiap.games.dto.UserRegisterDto;
+import br.com.fiap.games.model.User;
+import br.com.fiap.games.service.TokenService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +23,19 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticate;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping
-    public ResponseEntity login(@RequestBody LoginDto login){
+    public ResponseEntity login(@RequestBody UserRegisterDto user){
         UsernamePasswordAuthenticationToken usernamePassword =
-                new UsernamePasswordAuthenticationToken(login.email(), login.password());
+                new UsernamePasswordAuthenticationToken(user.email(), user.password());
 
         Authentication auth = authenticate.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        String token = tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new TokenDto(token));
     }
 
 }
